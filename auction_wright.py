@@ -69,6 +69,7 @@ class Auction():
         second_highest_bid = 0 # starts at zero
         for bidder,bid in bids.items():
             if bid > max_bid:
+                second_highest_bid = max_bid
                 max_bid = bid
                 winning_bidder = bidder     # set/update winning bidder
             elif bid > second_highest_bid:
