@@ -39,7 +39,7 @@ class Auction():
     num_rounds
     balances_by_round"""
     
-    def __init__(self, users, bidders):
+    def __init__(self, users, bidders, auction_id):
         self.bidders = bidders
         self.users = users
         self.balances = {bidder:0 for bidder in self.bidders} # finances will be completely handled in Auction class
@@ -51,6 +51,7 @@ class Auction():
         self.balances_by_round = {bidder:[0] for bidder in self.bidders}
         self.secret_probs = [user.get_prob() for user in users]
         self.rounds = {}
+        self.auction_id = auction_id
     
     def execute_round(self):
         """This should execute all the steps within a single round of the game"""
@@ -64,16 +65,33 @@ class Auction():
             bid = bidder.bid(user)
             bids[bidder] = bid
         
-        # loop through the bids dictionary to figure out the winning_bidder and the second_highest_bid
+        # # loop through the bids dictionary to figure out the winning_bidder and the second_highest_bid
+        # max_bid = 0            # only for the purpose of determining winning_bidder
+        # second_highest_bid = 0 # starts at zero
+        # for bidder,bid in bids.items():
+        #     if bid > max_bid:
+        #         second_highest_bid = max_bid
+        #         max_bid = bid
+        #         winning_bidder = bidder     # set/update winning bidder
+        #     elif bid > second_highest_bid:
+        #         second_highest_bid = bid    # update second_highest price
+        
+            # loop through the bids dictionary to figure out the winning_bidder and the second_highest_bid
         max_bid = 0            # only for the purpose of determining winning_bidder
         second_highest_bid = 0 # starts at zero
+        winning_bidders = []
         for bidder,bid in bids.items():
             if bid > max_bid:
                 second_highest_bid = max_bid
                 max_bid = bid
-                winning_bidder = bidder     # set/update winning bidder
+                winning_bidders.clear()
+                winning_bidders.append(bidder) 
+            elif bid == max_bid:
+                winning_bidders.append(bidder)
+                second_highest_bid = bid
             elif bid > second_highest_bid:
-                second_highest_bid = bid    # update second_highest price
+                second_highest_bid = bid
+        winning_bidder = np.random.choice(winning_bidders)
             
         # show the ad to the user
         ad_outcome = self.users[user].show_ad()
