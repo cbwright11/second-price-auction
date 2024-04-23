@@ -1,9 +1,10 @@
+import numpy as np
 
 class Bidder():
     """This class creates bidders equipped with knowledge of the number of users in the auction and the number 
     of auction rounds to be played"""
     
-    def __init__(self, num_users, num_rounds, alpha = 0.1, aggressiveness = 0.85, under_cut = 0):
+    def __init__(self, num_users, num_rounds, bidder_type = "smart", alpha = 0.1, aggressiveness = 0.85, under_cut = 0):
         # third entry is the estimated clicking likelihood of the user
         self.prob_estimates = {i:[0,0,0] for i in range(num_users)}
         self.current_user = 0 
@@ -13,6 +14,7 @@ class Bidder():
         self.under_cut = under_cut
         self.current_round = 0
         self.aggressiveness = aggressiveness
+        self.bidder_type = bidder_type
     
     def bid(self, user_id):
         """Returns a non-negative amount of money. If you don't wish to bid anything on a given user, this should 
@@ -22,12 +24,17 @@ class Bidder():
         clicking."""
         self.current_user = user_id
 
-        if self.current_round / self.num_rounds < self.alpha: # for the first `alpha` percent of the game
-            self.current_round += 1
-            return self.aggressiveness # simply bid `aggressiveness` = 0.6
-        else: # for the rest of the game
-            self.current_round += 1
-            return self.prob_estimates[user_id][2] - self.under_cut # base the bid on the estimated clicking likelihood of the user
+        if self.bidder_type == "smart":
+            if self.current_round / self.num_rounds < self.alpha: # for the first `alpha` percent of the game
+                self.current_round += 1
+                return self.aggressiveness # simply bid `aggressiveness` = 0.6
+            else: # for the rest of the game
+                self.current_round += 1
+                return self.prob_estimates[user_id][2] - self.under_cut # base the bid on the estimated clicking likelihood of the user
+        elif self.bidder_type == "random":
+            return np.random.uniform()
+        else:
+            return 0
         
     
     def notify(self, auction_winner, price, clicked=None):
