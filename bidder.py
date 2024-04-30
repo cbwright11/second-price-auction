@@ -4,7 +4,7 @@ class Bidder():
     """This class creates bidders equipped with knowledge of the number of users in the auction and the number 
     of auction rounds to be played"""
     
-    def __init__(self, num_users, num_rounds, bidder_type = "smart", alpha = 0.1, aggressiveness = 0.85, under_cut = 0):
+    def __init__(self, num_users, num_rounds, bidder_id = None, bidder_type = "smart", alpha = 0.1, aggressiveness = 0.85, under_cut = 0):
         # third entry is the estimated clicking likelihood of the user
         self.prob_estimates = {i:[0,0,0] for i in range(num_users)}
         self.current_user = 0 
@@ -15,6 +15,7 @@ class Bidder():
         self.current_round = 0
         self.aggressiveness = aggressiveness
         self.bidder_type = bidder_type
+        self.bidder_id = bidder_id
     
     def bid(self, user_id):
         """Returns a non-negative amount of money. If you don't wish to bid anything on a given user, this should 
