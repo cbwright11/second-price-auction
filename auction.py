@@ -65,19 +65,7 @@ class Auction():
             bid = bidder.bid(user)
             bids[bidder] = bid
         
-        # # loop through the bids dictionary to figure out the winning_bidder and the second_highest_bid
-        # max_bid = 0            # only for the purpose of determining winning_bidder
-        # second_highest_bid = 0 # starts at zero
-        # for bidder,bid in bids.items():
-        #     if bid > max_bid:
-        #         second_highest_bid = max_bid
-        #         max_bid = bid
-        #         winning_bidder = bidder     # set/update winning bidder
-        #     elif bid > second_highest_bid:
-        #         second_highest_bid = bid    # update second_highest price
-        
-            # loop through the bids dictionary to figure out the winning_bidder and the second_highest_bid
-        max_bid = 0            # only for the purpose of determining winning_bidder
+        max_bid = 0            # only for the purpose of determining winning_bidder and winning price
         second_highest_bid = 0 # starts at zero
         winning_bidders = []
         for bidder,bid in bids.items():
