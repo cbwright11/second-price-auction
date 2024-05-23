@@ -39,7 +39,7 @@ class Auction():
     num_rounds
     balances_by_round"""
     
-    def __init__(self, users, bidders, auction_id):
+    def __init__(self, users, bidders):
         self.bidders = bidders
         self.users = users
         self.balances = {bidder:0 for bidder in self.bidders} # finances will be completely handled in Auction class
@@ -51,7 +51,6 @@ class Auction():
         self.balances_by_round = {bidder:[0] for bidder in self.bidders}
         self.secret_probs = [user.get_prob() for user in users]
         self.rounds = {}
-        self.auction_id = auction_id
     
     def execute_round(self):
         """This should execute all the steps within a single round of the game"""
