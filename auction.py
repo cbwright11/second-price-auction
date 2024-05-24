@@ -39,7 +39,7 @@ class Auction():
     num_rounds
     balances_by_round"""
     
-    def __init__(self, users, bidders):
+    def __init__(self, users, bidders, auction_id=None):
         self.bidders = bidders
         self.users = users
         self.balances = {bidder:0 for bidder in self.bidders} # finances will be completely handled in Auction class
@@ -51,6 +51,7 @@ class Auction():
         self.balances_by_round = {bidder:[0] for bidder in self.bidders}
         self.secret_probs = [user.get_prob() for user in users]
         self.rounds = {}
+        self.auction_id = auction_id
     
     def execute_round(self):
         """This should execute all the steps within a single round of the game"""
@@ -139,10 +140,14 @@ class Auction():
             y = [[balance for balance in self.balances_by_round[bidder]] for bidder in self.bidders]
             for bidder in y:
                 plt.plot(x,bidder)
-            plt.legend(["bidder" + str(i) for i in range(len(y))])
+            # plt.legend(["bidder" + str(i) for i in range(len(y))])
+            legend = ["bidder" + str(i) + " | alpha: " + str(self.bidders[i].alpha) + ", agg: " + str(self.bidders[i].aggressiveness) for i in range(len(self.bidders))]
+            legend[0] = "bidder0 | bids only $0"
+            legend[-1] = "bidder" + str(len(legend) - 1) + " | bids randomly"
+            plt.legend(legend, bbox_to_anchor=(1.05, 1.0))
             plt.xlabel("round")
             plt.ylabel("balance")
-            plt.title("history of balances by user over the rounds")
+            plt.title("history of balances by bidder over the rounds")
             plt.show()
         
         elif info_type == "wins_by_bidder":
