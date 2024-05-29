@@ -20,7 +20,7 @@ The central reasoning that should govern a bidder's behavior in this auction is 
 Therefore, bidding can serve two purposes: (1.) to gain information about the users' clicking probabilities and (2.) to make the bidder money. When a bidder pursues the former objective they are said to be "exploring" and when they pursue the latter they are "exploiting". 
 
 The image below depicts an auction with 10 bidders. Bidder7 - represented by the gray line - implements a successful explore/exploit approach. Bidders 3 and 8 unsuccessfully implement such an approach (and bidder9 bids randomly to no avail). The concepts of `alpha` and `agg` in the legend will be explained below. 
-<img src="images/balances_by_round_with_legend.png" width=300> <br>
+<img src="images/balances_by_round_with_legend.png" width=600> <br>
 
 At least three questions arise for a bidder attempting to leverage an explore/exploit approach to strategic bidding:
 1. For how many rounds should I explore before using the information I've gained to exploit?
@@ -44,14 +44,15 @@ This results in $1000$ ($10\times20\times5$) unique bidders.
 I then proceeded to run many auctions with different combinations of these bidders. Instead of *systematically* trying specific combinations of bidders within a given auction, I would initialize each auction with anywhere from $5$ to $9$ bidders chosen *randomly* from this set of $1000$. I ran enough auctions that each bidder participated in at least $10$ different auctions (with some participating in as many as $45$) in order to minimize the effect of chance on their performance. 
 
 You can see the full distribution of number of auctions played across the 1000 unique bidders below. <br>
-<img src="images/Histogram_dpi300.jpg" width=300> <br>
+<img src="images/Histogram_dpi300.jpg" width=600> <br>
 
 After running $1000$ rounds of an auction, I recorded each bidder's ending balance. For a given bidder, I operationalize their performance by averaging their ending balance across the auctions they participated in; I refer to this variable as `Average Final Balance`. You can see the full distribution of this variable below.
-<img src="images/AFB_dpi300.jpg" width=300> <br>
+<img src="images/AFB_dpi300.jpg" width=600> <br>
+
 About a quarter of the bidders finished with an Average Final Balance of $0 (and about a quarter more were very close to $0); indicating they likely never won a round during their exploration stage and subsequently bid nothing during their exploitation stage. The rest of the distribution is interesting: it appears to be somewhat normal for positive values but extremely spread out for negative values. One interpretation of this phenomenon is that spending money is much easier in this game than earning it, leading to greater potential for highly ineffective bidding than highly effective bidding. 
 
 This brings me to the final discussion: the impact of `alpha`, `aggressiveness`, and `undercut` on `Average Final Balance`. The goal of this analysis was to understand which combinations of these three variabels yield the most effective bidding strategy (and which are most ineffective). I realize now that `alpha` and `aggressiveness` are fundamentally linked in their affect on `Average Final Balance` while the impact of `under_cut` can be considered separately. In fact, `under_cut` appears to be weakly impactful on overall performance: the only discernable relationship is that the highest values of `under_cut` lead to slightly worse outcomes than the smallest values. Therefore, in order to visualize the joint impact of `alpha` and `aggressiveness` on `Average Final Balance`, I present a heatmap colored by performance with the independent variables on the axes. Each square is averaged over the 5 different values of `under_cut` for a given combination of `alpha` and `aggressiveness`. 
-<img src="images/heatmap_dpi300.jpg" width=300> <br>
+<img src="images/heatmap_dpi300.jpg" width=600> <br>
 
 This heatmap offers many lessons. Most glaringly, combinations of high `alpha` and high `aggressiveness` are extremely ineffective. This is made clear by the darkly colored bottom-right portion of the map. This is a special case of the general observation that high values of `alpha` never yield positive results. This is because if a bidder spends the majority of the auction exploring, they don't leave enough time to recoup their investment through exploitation, especially if that investment was very large (as would result from a high `aggressiveness` value). 
 
