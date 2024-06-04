@@ -51,8 +51,6 @@ After running $1000$ rounds of an auction, I recorded each bidder's ending balan
 
 About a quarter of the bidders finished with an Average Final Balance of $0 (and about a quarter more were very close to $0); indicating they likely never won a round during their exploration stage and subsequently bid nothing during their exploitation stage. The rest of the distribution is interesting: it appears to be somewhat normal for positive values but extremely spread out for negative values. One interpretation of this phenomenon is that spending money is much easier in this game than earning it, leading to greater potential for highly ineffective bidding than highly effective bidding. 
 
-
-
 This brings me to the final discussion: the impact of `alpha`, `aggressiveness`, and `undercut` on `Average Final Balance`. The goal of this analysis was to understand which combinations of these three variabels yield the most effective bidding strategy (and which are most ineffective). I realize now that `alpha` and `aggressiveness` are fundamentally linked in their affect on `Average Final Balance` while the impact of `under_cut` can be considered separately. In fact, `under_cut` appears to be weakly impactful on overall performance: the only discernable relationship is that the highest values of `under_cut` lead to slightly worse outcomes than the smallest values. Therefore, in order to visualize the joint impact of `alpha` and `aggressiveness` on `Average Final Balance`, I present a heatmap colored by performance with the independent variables on the axes. Each square is averaged over the 5 different values of `under_cut` for a given combination of `alpha` and `aggressiveness`. 
 <img src="images/heatmap_dpi300.jpg" width=600> <br>
 
