@@ -46,7 +46,7 @@ I then proceeded to run many auctions with different combinations of these bidde
 You can see the full distribution of number of auctions played across the 1000 unique bidders below. <br>
 <img src="images/Histogram_dpi300.jpg" width=600> <br>
 
-After running $1000$ rounds of an auction, I recorded each bidder's ending balance. For a given bidder, I operationalize their performance by averaging their ending balance across the auctions they participated in; I refer to this variable as `Average Final Balance`. You can see the full distribution of this variable below.
+After running $1000$ rounds of an auction, I recorded each bidder's ending balance. For a given bidder, I operationalize their performance by averaging their ending balance across the auctions they participated in; I refer to this variable as `Average Final Balance`. You can see the full distribution of this variable below. (Apologies if the image is not rendering properly, to view you can navigate to the "images/" folder and select "AFB_dpi300.jpg")
 <img src="images/AFB_dpi300.jpg" width=600> <br>
 
 About a quarter of the bidders finished with an Average Final Balance of $0 (and about a quarter more were very close to $0); indicating they likely never won a round during their exploration stage and subsequently bid nothing during their exploitation stage. The rest of the distribution is interesting: it appears to be somewhat normal for positive values but extremely spread out for negative values. One interpretation of this phenomenon is that spending money is much easier in this game than earning it, leading to greater potential for highly ineffective bidding than highly effective bidding. 
